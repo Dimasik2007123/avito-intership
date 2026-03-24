@@ -22,7 +22,6 @@ export type AutoItemParams = {
   enginePower?: number;
 };
 
-// ============ Параметры для недвижимости ============
 export type RealEstateItemParams = {
   type?: "flat" | "house" | "room";
   address?: string;
@@ -30,7 +29,6 @@ export type RealEstateItemParams = {
   floor?: number;
 };
 
-// ============ Параметры для электроники ============
 export type ElectronicsItemParams = {
   type?: "phone" | "laptop" | "misc";
   brand?: string;
@@ -45,7 +43,6 @@ export type MessageProps = {
   duration?: number;
 };
 
-// ============ Полное объявление (GET /items/:id) ============
 export type Item = {
   id: number;
   category: Category;
@@ -58,7 +55,6 @@ export type Item = {
   params: AutoItemParams | RealEstateItemParams | ElectronicsItemParams;
 };
 
-// ============ Ответ API для списка (GET /items) ============
 export type ItemsGetOut = {
   items: Array<{
     id: number;
@@ -70,8 +66,6 @@ export type ItemsGetOut = {
   total: number;
 };
 
-// ============ Ответ API для детального просмотра (GET /items/:id) ============
-
 export type ItemUpdateIn = {
   category: "auto" | "real_estate" | "electronics";
   title: string;
@@ -80,7 +74,6 @@ export type ItemUpdateIn = {
   params: AutoItemParams | RealEstateItemParams | ElectronicsItemParams;
 };
 
-// ============ Параметры запроса для GET /items ============
 export type GetItemsParams = {
   q?: string;
   limit?: number;
@@ -91,7 +84,6 @@ export type GetItemsParams = {
   sortDirection?: "asc" | "desc";
 };
 
-// ============ Для состояния Redux ============
 export type AdsState = {
   items: ItemsGetOut["items"];
   total: number;
@@ -102,7 +94,6 @@ export type AdsState = {
   updating: boolean;
 };
 
-// ============ Фильтры ============
 export type FiltersState = {
   search: string;
   categories: Category[];
@@ -113,7 +104,6 @@ export type FiltersState = {
   page: number;
 };
 
-// ============ Черновики ============
 export type DraftState = {
   [key: string]: Partial<Item>;
 };
