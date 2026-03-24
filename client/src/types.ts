@@ -1,10 +1,5 @@
 export type Category = "auto" | "real_estate" | "electronics";
-type Theme = "light" | "dark";
 type Layout = "grid" | "list";
-
-export type UiState = {
-  theme: Theme;
-};
 
 export type AITooltipProps = {
   message: string;
