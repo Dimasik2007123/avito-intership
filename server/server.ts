@@ -115,6 +115,29 @@ fastify.get<ItemsGetRequest>("/items", (request) => {
   };
 });
 
+fastify.post("/items", (request, reply) => {
+  try {
+    const parsedData = ItemUpdateInSchema.parse(request.body);
+    const now = new Date().toISOString();
+    const newItem = {
+      id: ITEMS.reduce((maxId, item) => Math.max(maxId, item.id), 0) + 1,
+      createdAt: now,
+      updatedAt: now,
+      ...parsedData,
+    } as Item;
+
+    ITEMS.push(newItem);
+    reply.status(201).send({ id: newItem.id });
+  } catch (error) {
+    if (error instanceof ZodError) {
+      reply.status(400).send({ success: false, error: treeifyError(error) });
+      return;
+    }
+
+    throw error;
+  }
+});
+
 interface ItemUpdateRequest extends Fastify.RequestGenericInterface {
   Params: {
     id: string;
@@ -162,6 +185,29 @@ fastify.put<ItemUpdateRequest>("/items/:id", (request, reply) => {
 
     throw error;
   }
+});
+
+fastify.delete<ItemGetRequest>("/items/:id", (request, reply) => {
+  const itemId = Number(request.params.id);
+
+  if (!Number.isFinite(itemId)) {
+    reply
+      .status(400)
+      .send({ success: false, error: "Item ID path param should be a number" });
+    return;
+  }
+
+  const itemIndex = ITEMS.findIndex((item) => item.id === itemId);
+
+  if (itemIndex === -1) {
+    reply
+      .status(404)
+      .send({ success: false, error: "Item with requested id doesn't exist" });
+    return;
+  }
+
+  ITEMS.splice(itemIndex, 1);
+  return { success: true };
 });
 
 const port = Number(process.env.port) ?? 8080;

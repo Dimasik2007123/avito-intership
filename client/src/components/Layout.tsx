@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Outlet, useLocation, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
@@ -18,13 +19,32 @@ import avito from "../assets/images/avito.png";
 import dots from "../assets/images/Traffic Lights.svg";
 
 function Layout() {
+  const [currentDate, setCurrentDate] = useState(() => new Date());
   const dispatch = useDispatch();
   const { show, type } = useSelector((state: RootState) => state.notification);
   const location = useLocation();
   const path = location.pathname;
   const isAdDetail = /^\/ads\/\d+$/.test(path);
   const isAdEdit = /^\/ads\/\d+\/edit$/.test(path);
-  const hasWhiteBg = isAdDetail || isAdEdit;
+  const isAdCreate = path === "/ads/new";
+  const hasWhiteBg = isAdDetail || isAdEdit || isAdCreate;
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setCurrentDate(new Date()), 60_000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  });
+  const timeFormatter = new Intl.DateTimeFormat("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
 
   return (
     <div className="app-layout">
@@ -60,8 +80,12 @@ function Layout() {
               <img src={switc} className="apple_image" alt="Swicth"></img>
             </div>
             <div className="d-flex align-items-center gap-0 ms-1-2">
-              <div className="text-wrapper px-4px me-0">Mon Jun 22</div>
-              <div className="text-wrapper px-4px">9:41 AM</div>
+              <div className="text-wrapper px-4px me-0">
+                {dateFormatter.format(currentDate)}
+              </div>
+              <div className="text-wrapper px-4px">
+                {timeFormatter.format(currentDate)}
+              </div>
             </div>
           </div>
         </div>
@@ -83,12 +107,12 @@ function Layout() {
                   <div className="d-flex logo-wrapper justify-content-center align-items-center">
                     <img src={avito} className="logo" alt="Avito"></img>
                   </div>
-                  avito.ru
+                  zavito.ru
                 </div>
               </Link>
             </div>
           </div>
-          {isAdDetail || isAdEdit ? (
+          {isAdDetail || isAdEdit || isAdCreate ? (
             <div className="ad-detail-content">
               <Outlet />
             </div>

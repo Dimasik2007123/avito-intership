@@ -21,7 +21,7 @@ export const AITooltip = ({
         const top = rect.top - tooltipRect.height - 4;
         const left = rect.left;
 
-        if (top < 0) {
+        /*if (top < 0) {
           onClose();
         }
 
@@ -30,7 +30,7 @@ export const AITooltip = ({
         }
         if (left < 0) {
           onClose();
-        }
+        }*/
 
         const fitsInWindow =
           top >= 0 &&
@@ -117,7 +117,6 @@ export const AITooltip = ({
           </div>
         </div>
       </div>
-      {/* Стрелка */}
       <div
         style={{
           position: "absolute",
@@ -176,7 +175,6 @@ export const AITooltip = ({
           </div>
         </div>
       </div>
-      {/* Стрелка */}
       <div
         style={{
           position: "absolute",

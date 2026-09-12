@@ -26,3 +26,15 @@ export const updateItem = async (
   const { data } = await api.put(`/items/${id}`, payload);
   return data;
 };
+
+export const deleteItem = async (id: number): Promise<{ success: boolean }> => {
+  const { data } = await api.delete(`/items/${id}`);
+  return data;
+};
+
+export const createItem = async (
+  payload: ItemUpdateIn,
+): Promise<{ id: number }> => {
+  const { data } = await api.post("/items", payload);
+  return data;
+};

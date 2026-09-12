@@ -20,11 +20,13 @@
 - Bootstrap
 - Node.js
 - TypeScript
-- React v.19.2.4
+- React v19.2.4
+- React Redux v9.2.0
+- React Router v7.13.1
 - Axios v1.13.6
-- React Router v.7.13.1
-- Vite v.8.0.1
+- Vite v8.0.1
 - Docker + Docker Compose
+- Ollama v0.6.3
 
 ### Как запустить проект
 

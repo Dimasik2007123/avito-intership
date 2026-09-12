@@ -343,6 +343,7 @@ body,
 }
 
 .stats {
+  position: relative;
   height: 74px;
   padding-left: 8px;
   padding-top: 12px;
@@ -1652,12 +1653,38 @@ body,
   margin-top: -8px;
 }
 
+.create-ad-button {
+  position: absolute;
+  top: 18px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  min-height: 38px;
+  border-radius: 8px;
+  background: #1890ff;
+  color: #fff;
+  font-family: "Inter";
+  font-size: 15px;
+  line-height: 22px;
+  text-decoration: none;
+}
+
+.create-ad-button span {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 18px;
+}
+
 /*КНОПКИ УПРАВЛЕНИЯ*/
 
 .btn-save {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 8px 12px;
   margin-right: 2px;
   gap: 8px;
@@ -1693,6 +1720,26 @@ body,
   border: none;
 }
 
+.btn-delete {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  gap: 8px;
+  width: 102px;
+  height: 38px;
+  background: #ff4d4f;
+  border-radius: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fff;
+  border: none;
+}
+
 /*СООБЩЕНИЯ О СОХРАНЕНИИ*/
 
 .message-block {
@@ -1707,7 +1754,7 @@ body,
   background: #f6ffed;
   border: 1px solid #b7eb8f;
   border-radius: 2px;
-  z-index: 9999;
+  z-index: 999999;
 }
 
 .message-wrapper {
@@ -1723,6 +1770,7 @@ body,
   font-size: 14px;
   line-height: 22px;
   color: rgba(0, 0, 0, 0.85);
+  z-index: 999999;
 }
 
 .message-block-error {
@@ -1737,7 +1785,7 @@ body,
   background: #fff1f0;
   border: 1px solid #ffccc7;
   border-radius: 2px;
-  z-index: 9999;
+  z-index: 999999;
 }
 
 .message-wrapper-text {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
 import { getItems } from "../api/items";
@@ -112,6 +113,10 @@ function AdsList() {
           {totalAll}{" "}
           {declension(totalAll, ["объявление", "объявления", "объявлений"])}
         </div>
+        <Link to="/ads/new" className="create-ad-button">
+          <span aria-hidden="true">+</span>
+          Создать объявление
+        </Link>
       </div>
       <div className="top-panel">
         <div className="d-flex justify-content-between align-items-center">

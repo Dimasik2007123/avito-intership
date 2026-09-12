@@ -30,8 +30,14 @@ services:
       - ollama_data:/root/.ollama
     networks:
       - app-network
-    command: >
-      sh -c "ollama pull llama3 && sleep 5 && ollama serve && wait"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        ollama serve &
+        server_pid=$$!
+        until ollama list >/dev/null 2>&1; do sleep 1; done
+        ollama pull llama3
+        wait "$$server_pid"
 
 networks:
   app-network:

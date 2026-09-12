@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store";
-import { updateItem, getItem } from "../api/items";
+import { updateItem, deleteItem, getItem } from "../api/items";
 import {
   fetchAdStart,
   fetchAdSuccess,
@@ -392,6 +392,29 @@ function AdEdit() {
         }),
       );
       navigate(`/ads/${id}`);
+    } catch {
+      dispatch(updateAdFailure());
+      dispatch(
+        showNotification({
+          type: "error",
+        }),
+      );
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!id || !window.confirm("Удалить это объявление?")) return;
+
+    dispatch(updateAdStart());
+    try {
+      await deleteItem(parseInt(id, 10));
+      dispatch(clearDraft(id));
+      dispatch(
+        showNotification({
+          type: "success",
+        }),
+      );
+      navigate("/ads");
     } catch {
       dispatch(updateAdFailure());
       dispatch(
@@ -942,6 +965,14 @@ function AdEdit() {
                     onClick={() => navigate(`/ads/${id}`)}
                   >
                     Отменить
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-delete"
+                    onClick={handleDelete}
+                    disabled={updating}
+                  >
+                    Удалить
                   </button>
                 </div>
               </form>
