@@ -40,6 +40,7 @@ export type MessageProps = {
 
 export type Item = {
   id: number;
+  isMine: boolean;
   category: Category;
   title: string;
   description?: string;
@@ -57,6 +58,7 @@ export type ItemsGetOut = {
     title: string;
     price: number;
     needsRevision: boolean;
+    isMine: boolean;
   }>;
   total: number;
 };
@@ -74,6 +76,7 @@ export type GetItemsParams = {
   limit?: number;
   skip?: number;
   needsRevision?: boolean;
+  mine?: boolean;
   categories?: string;
   sortColumn?: "title" | "createdAt";
   sortDirection?: "asc" | "desc";
@@ -105,6 +108,7 @@ export type DraftState = {
 
 export type AdCardProps = {
   id: number;
+  isMine: boolean;
   title: string;
   layout: "grid" | "list";
   price: number;

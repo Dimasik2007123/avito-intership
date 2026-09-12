@@ -15,6 +15,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index={true} element={<AdsList />} />
       <Route path="ads" element={<AdsList />} />
+      <Route path="all-ads" element={<AdsList />} />
       <Route path="ads/new" element={<AdCreate />} />
       <Route path="ads/:id" element={<AdDetail />} />
       <Route path="ads/:id/edit" element={<AdEdit />} />

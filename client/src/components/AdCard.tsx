@@ -14,6 +14,7 @@ function AdCard({
   price,
   category,
   needsRevision,
+  isMine,
   layout,
 }: AdCardProps) {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function AdCard({
           </span>
           <h6 className="product-list-item__title">{title}</h6>
           <p className="product-list-item__price">{price.toLocaleString()} ₽</p>
-          {needsRevision && (
+          {isMine && needsRevision && (
             <span className="product-card__badge">Требует доработок</span>
           )}
         </div>
@@ -50,7 +51,7 @@ function AdCard({
         <div className="product-card__info">
           <h6 className="product-card__title">{title}</h6>
           <p className="product-card__price">{price.toLocaleString()} ₽</p>
-          {needsRevision && (
+          {isMine && needsRevision && (
             <span className="product-card__badge">Требует доработок</span>
           )}
         </div>

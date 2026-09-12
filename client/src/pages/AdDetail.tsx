@@ -146,14 +146,18 @@ function AdDetail() {
               <h1 className="card-title detail-card-title">
                 {currentItem.title || "Без названия"}
               </h1>
-              <button
-                className="edit-button mt-2"
-                onClick={() => navigate(`/ads/${id}/edit`)}
-              >
-                Редактировать
-                <span style={{ width: "8px", display: "inline-block" }}></span>
-                <img src={edit} alt="Edit" />
-              </button>
+              {currentItem.isMine && (
+                <button
+                  className="edit-button mt-2"
+                  onClick={() => navigate(`/ads/${id}/edit`)}
+                >
+                  Редактировать
+                  <span
+                    style={{ width: "8px", display: "inline-block" }}
+                  ></span>
+                  <img src={edit} alt="Edit" />
+                </button>
+              )}
             </div>
             <div className="d-flex flex-column align-items-end">
               <h1 className="card-title detail-card-title">
@@ -187,7 +191,7 @@ function AdDetail() {
             </div>
 
             <div className="right-column" style={{ flex: 1 }}>
-              {currentItem.needsRevision && (
+              {currentItem.isMine && currentItem.needsRevision && (
                 <div className="alert-block">
                   <img src={circle}></img>
                   <div className="right-alert">

@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "ownerId": "user-1",
     "category": "auto",
     "title": "Почти новая Mitsubishi Lancer",
     "description": "",
@@ -18,9 +19,10 @@
   },
   {
     "id": 2,
+    "ownerId": "user-2",
     "category": "real_estate",
     "title": "Видовая двушка",
-    "description": "",
+    "description": "Светлая квартира с панорамным видом во двор. Рядом метро, школа и несколько парков. Документы готовы к сделке.",
     "price": 23200000,
     "createdAt": "2026-02-14T00:00:00.000Z",
     "updatedAt": "2026-02-14T00:00:00.000Z",
@@ -98,17 +100,20 @@
   },
   {
     "id": 8,
+    "ownerId": "user-2",
     "category": "auto",
     "title": "ВАЗ (LADA) Niva 1.7 MT, 2020, 102 000 км",
-    "description": "",
+    "description": "Надёжный автомобиль для города и поездок за город. Один владелец, обслуживание по регламенту, комплект зимних шин в подарок.",
     "price": 990000,
     "createdAt": "2026-02-01T00:00:00.000Z",
     "updatedAt": "2026-02-01T00:00:00.000Z",
     "params": {
       "brand": "Lada",
       "model": "Niva",
-      "yearOfManufacture": "2020",
-      "transmission": "automatic"
+      "yearOfManufacture": 2020,
+      "transmission": "manual",
+      "mileage": 102000,
+      "enginePower": 83
     }
   },
   {
@@ -125,14 +130,18 @@
   },
   {
     "id": 10,
+    "ownerId": "user-2",
     "category": "real_estate",
     "title": "Коттедж 198,2 м² на участке 12 сот.",
-    "description": "",
+    "description": "Загородный дом с тремя спальнями, просторной кухней-гостиной и террасой. Участок ухожен, есть гараж и баня.",
     "price": 25000000,
     "createdAt": "2026-03-09T00:00:00.000Z",
     "updatedAt": "2026-03-09T00:00:00.000Z",
     "params": {
-      "type": "house"
+      "type": "house",
+      "address": "Московская область, д. Зеленая Долина",
+      "area": 198.2,
+      "floor": 2
     }
   },
   {
@@ -199,15 +208,17 @@
   },
   {
     "id": 16,
+    "ownerId": "user-2",
     "category": "electronics",
     "title": "Холодильник Bosch",
-    "description": "",
+    "description": "Рабочий холодильник Bosch в хорошем состоянии. Тихо работает, морозильная камера исправна. Есть небольшие следы использования.",
     "price": 9600,
     "createdAt": "2026-01-11T00:00:00.000Z",
     "updatedAt": "2026-01-11T00:00:00.000Z",
     "params": {
       "type": "misc",
       "brand": "Bosch",
+      "condition": "used",
       "color": "Чёрный"
     }
   },
@@ -278,14 +289,18 @@
   },
   {
     "id": 22,
+    "ownerId": "user-2",
     "category": "electronics",
     "title": "Игровой монстр",
-    "description": "",
+    "description": "Игровой компьютер для современных игр в Full HD. Комплектуется тихой системой охлаждения и подсветкой корпуса.",
     "price": 11990,
     "createdAt": "2026-03-07T00:00:00.000Z",
     "updatedAt": "2026-03-07T00:00:00.000Z",
     "params": {
       "type": "misc",
+      "brand": "AeroCool",
+      "model": "Gaming Pro",
+      "condition": "used",
       "color": "Красный"
     }
   },
@@ -357,15 +372,18 @@
   },
   {
     "id": 28,
+    "ownerId": "user-2",
     "category": "electronics",
     "title": "Саундбар Sony 5.1 HT-S40R",
-    "description": "",
+    "description": "Домашний кинотеатр Sony с беспроводными тыловыми колонками. Отличный звук для фильмов и музыки, пульт и кабели в комплекте.",
     "price": 15000,
     "createdAt": "2026-02-28T00:00:00.000Z",
     "updatedAt": "2026-02-28T00:00:00.000Z",
     "params": {
       "type": "misc",
       "brand": "Sony",
+      "model": "HT-S40R",
+      "condition": "new",
       "color": "Чёрный"
     }
   },
@@ -397,9 +415,10 @@
   },
   {
     "id": 31,
+    "ownerId": "user-2",
     "category": "auto",
     "title": "Mercedes-Benz Actros",
-    "description": "",
+    "description": "Тягач в рабочем состоянии, регулярно обслуживался. Подходит для дальних перевозок, установлен тахограф.",
     "price": 2460000,
     "createdAt": "2026-03-08T00:00:00.000Z",
     "updatedAt": "2026-03-08T00:00:00.000Z",

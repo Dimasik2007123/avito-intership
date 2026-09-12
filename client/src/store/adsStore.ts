@@ -60,6 +60,7 @@ export const adsSlice = createSlice({
           category: action.payload.category,
           title: action.payload.title,
           price: action.payload.price,
+          isMine: action.payload.isMine,
           needsRevision: action.payload.needsRevision,
         };
       }

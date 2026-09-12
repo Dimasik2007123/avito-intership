@@ -7,6 +7,13 @@ import { treeifyError, ZodError } from "zod";
 import { doesItemNeedRevision } from "./src/utils.ts";
 
 const ITEMS = items as Item[];
+const CURRENT_USER_ID = "user-1";
+
+// Старые записи получают владельца по ID, чтобы моковые данные оставались совместимыми.
+for (const item of ITEMS) {
+  if (!item.ownerId)
+    item.ownerId = item.id % 2 === 0 ? "user-2" : CURRENT_USER_ID;
+}
 
 const fastify = Fastify({
   logger: true,
@@ -52,7 +59,9 @@ fastify.get<ItemGetRequest>("/items/:id", (request, reply) => {
 
   return {
     ...item,
-    needsRevision: doesItemNeedRevision(item),
+    isMine: item.ownerId === CURRENT_USER_ID,
+    needsRevision:
+      item.ownerId === CURRENT_USER_ID ? doesItemNeedRevision(item) : false,
   };
 });
 
@@ -63,6 +72,7 @@ interface ItemsGetRequest extends Fastify.RequestGenericInterface {
     skip?: string;
     categories?: string;
     needsRevision?: string;
+    mine?: string;
   };
 }
 
@@ -72,6 +82,7 @@ fastify.get<ItemsGetRequest>("/items", (request) => {
     limit,
     skip,
     needsRevision,
+    mine,
     categories,
     sortColumn,
     sortDirection,
@@ -80,7 +91,9 @@ fastify.get<ItemsGetRequest>("/items", (request) => {
   const filteredItems = ITEMS.filter((item) => {
     return (
       item.title.toLowerCase().includes(q.toLowerCase()) &&
-      (!needsRevision || doesItemNeedRevision(item)) &&
+      (mine ? item.ownerId === CURRENT_USER_ID : true) &&
+      (!needsRevision ||
+        (item.ownerId === CURRENT_USER_ID && doesItemNeedRevision(item))) &&
       (!categories?.length ||
         categories.some((category) => item.category === category))
     );
@@ -109,7 +122,9 @@ fastify.get<ItemsGetRequest>("/items", (request) => {
         category: item.category,
         title: item.title,
         price: item.price,
-        needsRevision: doesItemNeedRevision(item),
+        isMine: item.ownerId === CURRENT_USER_ID,
+        needsRevision:
+          item.ownerId === CURRENT_USER_ID ? doesItemNeedRevision(item) : false,
       })),
     total: filteredItems.length,
   };
@@ -123,6 +138,7 @@ fastify.post("/items", (request, reply) => {
       id: ITEMS.reduce((maxId, item) => Math.max(maxId, item.id), 0) + 1,
       createdAt: now,
       updatedAt: now,
+      ownerId: CURRENT_USER_ID,
       ...parsedData,
     } as Item;
 
@@ -163,6 +179,13 @@ fastify.put<ItemUpdateRequest>("/items/:id", (request, reply) => {
     return;
   }
 
+  if (ITEMS[itemIndex].ownerId !== CURRENT_USER_ID) {
+    reply
+      .status(403)
+      .send({ success: false, error: "You cannot edit this item" });
+    return;
+  }
+
   try {
     const parsedData = ItemUpdateInSchema.parse({
       category: ITEMS[itemIndex].category,
@@ -171,6 +194,7 @@ fastify.put<ItemUpdateRequest>("/items/:id", (request, reply) => {
 
     ITEMS[itemIndex] = {
       id: ITEMS[itemIndex].id,
+      ownerId: ITEMS[itemIndex].ownerId,
       createdAt: ITEMS[itemIndex].createdAt,
       updatedAt: new Date().toISOString(),
       ...parsedData,
@@ -203,6 +227,13 @@ fastify.delete<ItemGetRequest>("/items/:id", (request, reply) => {
     reply
       .status(404)
       .send({ success: false, error: "Item with requested id doesn't exist" });
+    return;
+  }
+
+  if (ITEMS[itemIndex].ownerId !== CURRENT_USER_ID) {
+    reply
+      .status(403)
+      .send({ success: false, error: "You cannot delete this item" });
     return;
   }
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
 import { getItems } from "../api/items";
@@ -25,6 +25,8 @@ import arrowRight from "../assets/images/Right.svg";
 
 function AdsList() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const isAllAds = location.pathname === "/all-ads";
   const { items, total, loading, error, totalAll } = useSelector(
     (state: RootState) => state.ads,
   );
@@ -43,14 +45,14 @@ function AdsList() {
   useEffect(() => {
     const loadTotalAll = async () => {
       try {
-        const data = await getItems({ limit: 1 });
+        const data = await getItems({ limit: 1, mine: !isAllAds });
         dispatch(setTotalAll(data.total));
       } catch (er) {
         console.log(er);
       }
     };
     loadTotalAll();
-  }, [dispatch]);
+  }, [dispatch, isAllAds]);
 
   useEffect(() => {
     const loadAds = async () => {
@@ -60,6 +62,7 @@ function AdsList() {
           q: search || undefined,
           categories: categories.length > 0 ? categories.join(",") : undefined,
           needsRevision: needsRevisionOnly || undefined,
+          mine: !isAllAds,
           sortColumn,
           sortDirection,
           limit: 10,
@@ -81,6 +84,7 @@ function AdsList() {
     page,
     sortColumn,
     sortDirection,
+    isAllAds,
   ]);
 
   const totalPages = Math.ceil(total / 10);
@@ -108,15 +112,31 @@ function AdsList() {
   return (
     <div className="ads-list-container">
       <div className="stats">
-        <div className="my">Мои объявления</div>
+        <div className="my">
+          {isAllAds ? "Все объявления" : "Мои объявления"}
+        </div>
         <div className="total-count">
           {totalAll}{" "}
           {declension(totalAll, ["объявление", "объявления", "объявлений"])}
         </div>
-        <Link to="/ads/new" className="create-ad-button">
-          <span aria-hidden="true">+</span>
-          Создать объявление
-        </Link>
+        {isAllAds ? (
+          <Link to="/ads" className="create-ad-button">
+            Мои объявления
+          </Link>
+        ) : (
+          <>
+            <Link to="/all-ads" className="create-ad-button">
+              Все объявления
+            </Link>
+            <Link
+              to="/ads/new"
+              className="create-ad-button create-ad-button--secondary"
+            >
+              <span aria-hidden="true">+</span>
+              Создать объявление
+            </Link>
+          </>
+        )}
       </div>
       <div className="top-panel">
         <div className="d-flex justify-content-between align-items-center">

@@ -1672,6 +1672,14 @@ body,
   text-decoration: none;
 }
 
+.create-ad-button:not(.create-ad-button--secondary) {
+  right: 8px;
+}
+
+.create-ad-button--secondary {
+  right: 210px;
+}
+
 .create-ad-button span {
   font-size: 24px;
   font-weight: 300;
