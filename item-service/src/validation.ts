@@ -1,6 +1,10 @@
 import { z } from "zod";
-import { ITEM_CATEGORIES } from "./constants.ts";
-import { ItemSortColumn, SortDirection } from "./types.ts";
+
+export const ITEM_CATEGORIES = {
+  AUTO: "auto",
+  REAL_ESTATE: "real_estate",
+  ELECTRONICS: "electronics",
+} as const;
 
 const AutoTransmissionSchema = z.enum(["automatic", "manual"]);
 
@@ -25,7 +29,7 @@ export const RealEstateItemParamsSchema = z.strictObject({
 const ElectronicsTypeSchema = z.enum(["phone", "laptop", "misc"]);
 const ElectronicsConditionSchema = z.enum(["new", "used"]);
 
-export const ElectronicsEstateItemParamsSchema = z.strictObject({
+export const ElectronicsItemParamsSchema = z.strictObject({
   type: ElectronicsTypeSchema,
   brand: z.string().nonempty(),
   model: z.string().nonempty(),
@@ -33,40 +37,37 @@ export const ElectronicsEstateItemParamsSchema = z.strictObject({
   color: z.string().nonempty(),
 });
 
-const CategorySchema = z.enum(Object.values(ITEM_CATEGORIES));
+const CategorySchema = z.enum(["auto", "real_estate", "electronics"]);
 
 export const ItemsGetInQuerySchema = z.object({
   q: z.string().trim().optional().default(""),
   limit: z
     .string()
     .optional()
-    .transform((val) => (val ? parseInt(val, 10) : undefined))
+    .transform((v) => (v ? parseInt(v, 10) : undefined))
     .pipe(z.number().int().positive().optional().default(10)),
   skip: z
     .string()
     .optional()
-    .transform((val) => (val ? parseInt(val, 10) : undefined))
+    .transform((v) => (v ? parseInt(v, 10) : undefined))
     .pipe(z.number().int().min(0).optional().default(0)),
   categories: z
     .string()
     .optional()
-    .transform((val) => (val ? val.split(",").map((s) => s.trim()) : undefined))
+    .transform((v) => (v ? v.split(",").map((s) => s.trim()) : undefined))
     .pipe(z.array(CategorySchema).optional()),
   needsRevision: z
     .string()
     .optional()
-    .transform((val) => {
-      if (!val) return undefined;
-      return val === "true" || val === "1";
-    })
-    .pipe(z.boolean().optional().default(false)),
+    .transform((v) => v === "true" || v === "1")
+    .pipe(z.boolean().default(false)),
   mine: z
     .string()
     .optional()
-    .transform((val) => val !== "false" && val !== "0")
+    .transform((v) => v !== "false" && v !== "0")
     .pipe(z.boolean().default(true)),
-  sortColumn: z.enum<ItemSortColumn[]>(["title", "createdAt"]).optional(),
-  sortDirection: z.enum<SortDirection[]>(["asc", "desc"]).optional(),
+  sortColumn: z.enum(["title", "createdAt"]).optional(),
+  sortDirection: z.enum(["asc", "desc"]).optional(),
 });
 
 export const ItemUpdateInSchema = z
@@ -88,7 +89,7 @@ export const ItemUpdateInSchema = z
       }),
       z.object({
         category: z.literal(ITEM_CATEGORIES.ELECTRONICS),
-        params: ElectronicsEstateItemParamsSchema.partial(),
+        params: ElectronicsItemParamsSchema.partial(),
       }),
     ]),
   );

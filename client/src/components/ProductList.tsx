@@ -9,7 +9,7 @@ interface ProductListProps {
 function ProductList({ items, layout }: ProductListProps) {
   if (layout === "grid") {
     return (
-      <div className="product-list-scroll">
+      <div className="product-list-scroll hide-scrollbar">
         <div className="product-grid">
           {items.map((item) => (
             <AdCard key={item.id} {...item} layout={layout} />

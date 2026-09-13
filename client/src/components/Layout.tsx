@@ -15,7 +15,7 @@ import calendar from "../assets/images/calendar.png";
 import cart from "../assets/images/cart.svg";
 import ellips from "../assets/images/Ellipse 1.svg";
 import divider from "../assets/images/Divider.svg";
-import avito from "../assets/images/avito.png";
+import avito from "../assets/images/avito.svg";
 import dots from "../assets/images/Traffic Lights.svg";
 
 function Layout() {

@@ -1,31 +1,19 @@
-version: "3.8"
+version: "3.9"
 
 services:
-  backend:
-    build: ./server
+  mongo:
+    image: mongo:7
     ports:
-      - "8080:8080"
-    environment:
-      - port=8080
-      - HOST=0.0.0.0
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - mongo-data:/data/db
     networks:
       - app-network
-
-  frontend:
-    build: ./client
-    ports:
-      - "5173:3000"
-    environment:
-      - DOCKER_ENV=true
-    networks:
-      - app-network
-    depends_on:
-      - backend
 
   ollama:
     image: ollama/ollama:latest
     ports:
-      - "11434:11434"
+      - "${OLLAMA_PORT}:11434"
     volumes:
       - ollama_data:/root/.ollama
     networks:
@@ -36,12 +24,64 @@ services:
         ollama serve &
         server_pid=$$!
         until ollama list >/dev/null 2>&1; do sleep 1; done
-        ollama pull llama3
+        ollama pull ${OLLAMA_MODEL}
         wait "$$server_pid"
+
+  item-service:
+    build: ./item-service
+    ports:
+      - "${ITEM_SERVICE_PORT}:${ITEM_SERVICE_PORT}"
+    environment:
+      - PORT=${ITEM_SERVICE_PORT}
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  ai-service:
+    build: ./ai-service
+    ports:
+      - "${AI_SERVICE_PORT}:${AI_SERVICE_PORT}"
+    environment:
+      - PORT=${AI_SERVICE_PORT}
+      - OLLAMA_URL=${OLLAMA_URL}
+      - OLLAMA_MODEL=${OLLAMA_MODEL}
+    depends_on:
+      - ollama
+    networks:
+      - app-network
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "${GATEWAY_PORT}:${GATEWAY_PORT}"
+    environment:
+      - PORT=${GATEWAY_PORT}
+      - ITEM_SERVICE_URL=${ITEM_SERVICE_URL}
+      - AI_SERVICE_URL=${AI_SERVICE_URL}
+    depends_on:
+      - item-service
+      - ai-service
+    networks:
+      - app-network
+
+  client:
+    build: ./client
+    ports:
+      - "${FRONTEND_PORT}:3000"
+    environment:
+      - DOCKER_ENV=true
+      - VITE_API_URL=http://gateway:8080
+    depends_on:
+      - gateway
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+  ollama_data:
 
 networks:
   app-network:
     driver: bridge
-
-volumes:
-  ollama_data:

@@ -43,6 +43,10 @@ function AdsList() {
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   useEffect(() => {
+    dispatch(setPage(1));
+  }, [dispatch, isAllAds]);
+
+  useEffect(() => {
     const loadTotalAll = async () => {
       try {
         const data = await getItems({ limit: 1, mine: !isAllAds });
