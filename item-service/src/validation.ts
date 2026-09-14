@@ -37,7 +37,9 @@ export const ElectronicsItemParamsSchema = z.strictObject({
   color: z.string().nonempty(),
 });
 
-const CategorySchema = z.enum(["auto", "real_estate", "electronics"]);
+const CategorySchema = z.enum(
+  Object.values(ITEM_CATEGORIES) as [string, ...string[]],
+);
 
 export const ItemsGetInQuerySchema = z.object({
   q: z.string().trim().optional().default(""),

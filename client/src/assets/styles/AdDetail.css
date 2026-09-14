@@ -1,0 +1,222 @@
+.ad-detail-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 32px;
+  padding-bottom: 10px;
+  background-color: #ffffff;
+  border: none;
+}
+
+.ad-detail-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ad-detail-content::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 2px;
+}
+
+.ad-detail-content::-webkit-scrollbar-thumb {
+  background: #848388;
+  border-radius: 2px;
+}
+
+.card.detail-card {
+  border: none;
+  background-color: #ffffff;
+  box-shadow: none;
+}
+
+.card-body.detail-card-body {
+  border: none;
+  background-color: #ffffff;
+  box-shadow: none;
+  padding: 0;
+}
+
+.card-title.detail-card-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 4px;
+}
+
+.edit-button {
+  background-color: #1890ff;
+  border: none;
+  border-radius: 8px;
+  height: 38px;
+  width: 170px;
+  padding: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #f3f3f3;
+}
+
+.date-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  color: #848388;
+}
+
+.detail-row {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.detail-image {
+  background-color: #fafafa;
+  width: 480px;
+}
+
+.left-column {
+  flex-shrink: 0;
+  width: 480px;
+}
+
+.right-column {
+  flex: 1;
+  width: auto;
+  max-width: 527px;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.alert-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 12px 16px;
+  gap: 16px;
+  width: 512px;
+  height: auto;
+  background: #f9f1e6;
+  box-shadow:
+    0px 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0px 6px 16px rgba(0, 0, 0, 0.08),
+    0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.require-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1e1e1e;
+}
+
+.error-fields {
+  margin-top: 4px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.error-list {
+  margin: 0;
+  padding-left: 8px;
+  list-style-type: none;
+}
+
+.error-item {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.85);
+  position: relative;
+  padding-left: 14px;
+}
+
+.error-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.params-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.params-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: -30px;
+}
+
+.params-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.params-label {
+  width: 148px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.params-value {
+  flex: 1;
+  padding-left: 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1e1e1e;
+}
+
+.descript-title {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.descript-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1e1e1e;
+}

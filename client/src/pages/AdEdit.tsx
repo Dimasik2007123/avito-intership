@@ -95,12 +95,20 @@ function AdEdit() {
         const data = await getItem(numericId);
         dispatch(fetchAdSuccess(data));
         const savedDraft = localStorage.getItem(`draft_${id}`);
+        const normalizedData = {
+          ...data,
+          params: data.params || {},
+        };
         if (savedDraft) {
           const draftData = JSON.parse(savedDraft);
-          const mergedData = { ...data, ...draftData };
+          const mergedData = {
+            ...normalizedData,
+            ...draftData,
+            params: { ...normalizedData.params, ...(draftData.params || {}) },
+          };
           setFormData(mergedData);
         } else {
-          setFormData(data);
+          setFormData(normalizedData);
         }
       } catch {
         dispatch(fetchAdFailure());
@@ -334,7 +342,7 @@ function AdEdit() {
         title: formData.title,
         description: formData.description,
         price: formData.price,
-        params: { ...formData.params },
+        params: { ...(formData.params || {}) },
       };
       if (payload.category === "real_estate") {
         const params = payload.params as RealEstateItemParams;
@@ -562,7 +570,7 @@ function AdEdit() {
   }
   const labels = paramLabels[formData.category] || {};
   const getSelectValidationClass = (key: string) => {
-    const value = formData?.params[key as keyof typeof formData.params] ?? "";
+    const value = (formData.params as Record<string, unknown>)?.[key] ?? "";
     const strValue = String(value).trim();
     if (strValue === "") {
       return "input-warning";
@@ -761,8 +769,9 @@ function AdEdit() {
                 <div className="mb-0">
                   <label className="edit-label mb-0">Характеристики</label>
                   {categoryFields[formData.category]?.map((key) => {
-                    const value =
-                      formData.params[key as keyof typeof formData.params];
+                    const value = (
+                      formData.params as Record<string, unknown>
+                    )?.[key];
 
                     let optionsKey = key;
                     if (key === "type" && formData.category === "real_estate") {

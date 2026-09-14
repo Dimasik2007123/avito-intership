@@ -1,0 +1,61 @@
+.message-block {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 9px 16px;
+  gap: 10px;
+  width: 328px;
+  height: 40px;
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 2px;
+  z-index: 99999999;
+}
+
+.message-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 100%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.85);
+  z-index: 99999999;
+}
+
+.message-block-error {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 9px 16px;
+  gap: 10px;
+  width: 327px;
+  height: 118px;
+  background: #fff1f0;
+  border: 1px solid #ffccc7;
+  border-radius: 2px;
+  z-index: 99999999;
+}
+
+.message-wrapper-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.message-wrapper-text p {
+  margin: 0;
+  padding: 0;
+  padding-top: 2px;
+}
+
+.message-fade-out {
+  animation: fadeOut 1s forwards;
+}

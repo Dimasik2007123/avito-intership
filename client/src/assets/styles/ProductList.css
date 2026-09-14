@@ -1,0 +1,25 @@
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+.product-grid .product-card {
+  width: auto;
+  min-width: 0;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-list-scroll {
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 0;
+  scrollbar-gutter: stable;
+}

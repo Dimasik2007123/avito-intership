@@ -1,0 +1,175 @@
+.product-list-item {
+  height: 132px;
+  display: flex;
+  gap: 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.product-list-item__image {
+  width: 179px;
+  height: 132px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+.product-list-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-list-item__content {
+  flex: 1;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-list-item__category {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #848388;
+}
+
+.product-list-item__title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 24px;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product-list-item__price {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.product-card__badge {
+  width: 155px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  height: 26px;
+  min-height: 26px;
+  padding-left: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f9f1e6;
+  color: #faad14;
+  border-radius: 4px;
+}
+
+.product-card {
+  position: relative;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 268px;
+  min-height: 268px;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  background-color: #fafafa;
+}
+
+.product-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card__content {
+  padding: 12px;
+  position: relative;
+  background: #ffffff;
+}
+
+.product-card__category {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: #ffffff;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 6px;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  max-height: 22px;
+  border: 1px solid #d9d9d9;
+  color: rgba(0, 0, 0, 0.85);
+  box-sizing: border-box;
+}
+
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 4px;
+}
+
+.product-card__title {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.85);
+  margin-top: 10px;
+  overflow: hidden;
+  margin-bottom: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product-card__price {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.product-card__badge::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #faad14;
+  border-radius: 50%;
+}

@@ -1,0 +1,355 @@
+.card.edit {
+  border: none;
+  box-shadow: none;
+}
+
+.card-body.edit-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card-body.edit-body.p-1px {
+  padding-left: 2px;
+  padding-top: 0;
+  margin: 0;
+}
+
+.card-title.edit-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 0.85);
+  margin: 0;
+  padding: 0;
+}
+
+.edit-label {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  height: 32px;
+  gap: 8px;
+}
+
+.edit-label .text-danger {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: right;
+  color: #ff4d4f;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.custom-select {
+  margin-top: -2px;
+  margin-bottom: 2px;
+  height: 32px;
+  max-width: 256px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 0 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.custom-select__value {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.custom-select__arrow {
+  transition: transform 0.2s;
+}
+
+.custom-select__arrow.rotate {
+  transform: rotate(180deg);
+}
+
+.custom-select__dropdown {
+  max-width: 256px;
+  position: absolute;
+  top: calc(100%);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.custom-select__option {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.85);
+  transition: background 0.2s;
+}
+
+.custom-select__option:hover {
+  background-color: #f5f5f5;
+}
+
+/* Инпуты */
+.price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 456px;
+}
+
+.edit-control.edit-input {
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  height: 32px;
+  width: 456px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #ffffff;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #1e1e1e;
+}
+
+.input-clear-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-control.edit-input:focus {
+  border-color: #1890ff !important;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.input-warning {
+  border-color: #ffa940 !important;
+}
+
+.input-warning:focus {
+  border: 1px solid #1890ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  outline: none;
+}
+
+.edit-control.edit-input::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.edit-control.edit-input.is-invalid {
+  border-color: #ff4d4f;
+}
+
+.edit-control.edit-input.is-invalid:focus {
+  border-color: #ff4d4f;
+}
+
+.invalid-feedback {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
+.invalid-feedback.d-block {
+  display: block;
+}
+
+.edit-control.edit-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.edit-control.edit-input[type="number"]::-webkit-inner-spin-button,
+.edit-control.edit-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.price-suggest-wrapper {
+  position: relative;
+  display: inline-block;
+  height: 32px;
+}
+
+.price-suggest-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 195px;
+  height: 32px;
+  background-color: #f9f1e6;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+}
+
+.search-ai-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 100%;
+  align-items: center;
+  padding: 9.5px 5px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  color: #ffa940;
+}
+
+.edit-input.edit-input--description {
+  flex: 1;
+  margin-top: 2px;
+  width: 100%;
+  max-width: 100%;
+  min-height: 60px;
+  margin-bottom: 0;
+  padding: 8px 16px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.85);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.edit-input--description {
+  scroll-padding-bottom: 8px;
+}
+
+.edit-input--description.input-warning {
+  border-color: #d9d9d9 !important;
+  box-shadow: none;
+}
+
+.count-simb {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.25);
+  margin-top: -8px;
+}
+
+.btn-save {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  margin-right: 2px;
+  gap: 8px;
+  width: 108px;
+  height: 38px;
+  background: #1890ff;
+  border-radius: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #f3f3f3;
+  border: none;
+}
+
+.btn-cancel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  width: 102px;
+  height: 38px;
+  background: #d9d9d9;
+  border-radius: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #5a5a5a;
+  border: none;
+}
+
+.btn-delete {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  gap: 8px;
+  width: 102px;
+  height: 38px;
+  background: #ff4d4f;
+  border-radius: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fff;
+  border: none;
+}

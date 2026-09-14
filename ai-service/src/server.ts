@@ -1,33 +1,11 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
-import { generateDescription, suggestPrice } from "./services/ollamaService.js";
-import type { AIRequest } from "./types.js";
+import { aiController } from "./controllers/aiController.js";
 
 const fastify = Fastify({ logger: true });
 
 await fastify.register(cors, { origin: "*" });
-
-fastify.post<{ Body: AIRequest }>("/ai/description", async (request, reply) => {
-  try {
-    const { item } = request.body;
-    const response = await generateDescription(item);
-    return { response };
-  } catch (error) {
-    fastify.log.error(error);
-    reply.status(500).send({ error: "AI service error" });
-  }
-});
-
-fastify.post<{ Body: AIRequest }>("/ai/price", async (request, reply) => {
-  try {
-    const { item } = request.body;
-    const response = await suggestPrice(item);
-    return { response };
-  } catch (error) {
-    fastify.log.error(error);
-    reply.status(500).send({ error: "AI service error" });
-  }
-});
+await fastify.register(aiController);
 
 const port = Number(process.env.PORT) ?? 3002;
 
